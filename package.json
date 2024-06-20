@@ -1,5 +1,11 @@
 {
+  "scripts": {
+    "start": "parcel index.html",
+    "text": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
+    "parcel-bundler": "^1.12.5",
+    "phaser": "^3.80.1",
     "pokemontcgsdk": "^2.0.0"
   }
 }
