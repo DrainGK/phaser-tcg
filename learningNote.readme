@@ -1,0 +1,7 @@
+In Phaser 3, when you create a container and add elements to it, the position of the elements within the container is relative to the container's position. However, when you set the origin of these elements, it affects their alignment relative to their own bounding box, not the container. Here’s how you can correctly align your text relative to your image within the container:
+Understanding setOrigin
+The setOrigin method in Phaser sets the origin of display objects (like images and text) relative to their bounding box. The origin values are normalized, where:
+
+0, 0 is the top left of the object.
+0.5, 0.5 is the center of the object.
+1, 1 is the bottom right of the object.

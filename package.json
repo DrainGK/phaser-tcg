@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "parcel index.html",
+    "start": "parcel src/index.html",
     "text": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

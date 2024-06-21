@@ -38,3 +38,5 @@ class Card {
     this.damages = 0;
   }
 }
+
+export default Card;
