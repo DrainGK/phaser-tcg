@@ -165,7 +165,7 @@ var Card = /*#__PURE__*/_createClass(function Card(_ref) {
   this.weaknesses = weaknesses;
   this.resistances = resistances || [];
   this.states = [];
-  this.stack = 3;
+  this.count = 0;
   this.damages = 0;
 });
 var _default = exports.default = Card;
@@ -194,7 +194,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64164" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61795" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

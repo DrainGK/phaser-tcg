@@ -44,7 +44,7 @@ class MainMenuScene extends Phaser.Scene {
       this.time.delayedCall(
         100,
         () => {
-          this.scene.start("PreloadScene");
+          this.scene.start("GameScene");
         },
         [],
         this

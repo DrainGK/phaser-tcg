@@ -34,7 +34,7 @@ class Card {
     this.weaknesses = weaknesses;
     this.resistances = resistances || [];
     this.states = [];
-    this.stack = 3;
+    this.count = 0;
     this.damages = 0;
   }
 }

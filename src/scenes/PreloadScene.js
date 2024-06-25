@@ -17,7 +17,7 @@ class PreloadScene extends Phaser.Scene {
     this.events.once('cardsLoaded', () => {
       this.scene.stop('LoadingScene');
       console.log('Cards loaded, starting GameScene...');
-      this.scene.start("GameScene");
+      this.scene.start("MainMenuScene");
     });
   }
 
@@ -53,6 +53,9 @@ class PreloadScene extends Phaser.Scene {
       }).filter(card => card !== null);
       stored.push(...cards);
       console.log('Stored cards:', stored);
+
+      this.game.registry.set('stored', stored);
+
       // Load the first card image
       if (cards.length > 0) {
         this.load.image('firstCard', stored[120].images.small);

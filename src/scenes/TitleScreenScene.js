@@ -35,7 +35,7 @@ class TitleScreenScene extends Phaser.Scene {
       this.time.delayedCall(
         100,
         () => {
-          this.scene.start("MainMenuScene");
+          this.scene.start("PreloadScene");
         },
         [],
         this
