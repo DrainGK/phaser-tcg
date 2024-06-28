@@ -23,7 +23,7 @@ class PreloadScene extends Phaser.Scene {
 
   async loadCards() {
     const apiKey = "2742c28f-09da-49a1-b66b-f24a0ebd7b4e";
-    const apiUrl = "https://api.pokemontcg.io/v2/cards?q=id:sv5&supertype:Energy";
+    const apiUrl = "https://api.pokemontcg.io/v2/cards?q=id:sv5";
     const stored = [];
 
     try {

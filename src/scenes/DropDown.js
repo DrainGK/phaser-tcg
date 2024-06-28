@@ -44,7 +44,7 @@ class DropDown extends Phaser.GameObjects.Container {
             }).setInteractive();
 
             optionText.on('pointerover', () => {
-                optionText.setColor('#FF0000');
+                optionText.setColor(`#FAA300`);
             });
 
             optionText.on('pointerout', () => {

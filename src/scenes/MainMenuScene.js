@@ -13,20 +13,11 @@ class MainMenuScene extends Phaser.Scene {
     const startButtonImage = this.add.image(0, 0, "startButton");
     startButtonImage.setOrigin(0.5, 0.5);
 
-    const deckMenuButtonImage = this.add.image(0, 0, "startButton");
-    deckMenuButtonImage.setOrigin(0.5, 0.5);
-
     const startButtonText = this.add.text(0, 0, "FIGHT", {
       fontSize: "50px",
       fill: "#fff",
     });
     startButtonText.setOrigin(0.5, 0.5);
-
-    const deckMenuButtonText = this.add.text(0, 0, "DECK", {
-      fontSize: "50px",
-      fill: "#fff",
-    });
-    deckMenuButtonText.setOrigin(0.5, 0.5);
 
     const startButton = this.add.container(500, 400, [
       startButtonImage,
@@ -50,6 +41,15 @@ class MainMenuScene extends Phaser.Scene {
         this
       );
     });
+
+    const deckMenuButtonImage = this.add.image(0, 0, "startButton");
+    deckMenuButtonImage.setOrigin(0.5, 0.5);
+
+    const deckMenuButtonText = this.add.text(0, 0, "DECK", {
+      fontSize: "50px",
+      fill: "#fff",
+    });
+    deckMenuButtonText.setOrigin(0.5, 0.5);
 
     const deckMenuButton = this.add.container(500, 600, [
       deckMenuButtonImage,

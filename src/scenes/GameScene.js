@@ -17,7 +17,7 @@ class GameScene extends Phaser.Scene {
 
     new BackButton(this, 50, 50, (scene) => {
       scene.scene.start("MainMenuScene");
-    });
+    }, "BACK");
 
     cardImage.setInteractive();
     this.input.setDraggable(cardImage);
