@@ -6,7 +6,7 @@ import LargeButton from "./LargeButton";
 class DeckMenuScene extends Phaser.Scene {
   constructor() {
     super({ key: "DeckMenuScene" });
-    this.storedCards = [];
+    this.storedCardsFiltred = [];
     this.cardsListContainer = null; // Store reference to the cards container
     this.isDeckVisible = false;
     this.scrollEnabled = false;
@@ -25,6 +25,8 @@ class DeckMenuScene extends Phaser.Scene {
     this.storedCards = this.game.registry.get("stored");
     this.createBackground();
     this.deck = []; // Initialize the deck as an array
+    this.deckFiltred = this.deck;
+    this.storedCardsFiltred = this.storedCards;
     this.createCardSprites();
   }
 
@@ -101,21 +103,21 @@ class DeckMenuScene extends Phaser.Scene {
 
   filterSupertypes(selectedType) {
     console.log("Filtering cards for type:", selectedType);
-    this.filteredDeck = this.storedCards.filter(
+    this.filteredDeck = this.storedCardsFiltred.filter(
       (card) => card.supertype === selectedType
     );
     this.createCardSprites(this.filteredDeck);
   }
 
   filterTypes(selectedType) {
-    this.filteredDeck = this.storedCards.filter((card) =>
+    this.filteredDeck = this.storedCardsFiltred.filter((card) =>
       card.types?.includes(selectedType)
     );
     this.createCardSprites(this.filteredDeck);
   }
 
   filterSubtypes(selectedType) {
-    this.filteredDeck = this.storedCards.filter((card) =>
+    this.filteredDeck = this.storedCardsFiltred.filter((card) =>
       card.subtypes?.includes(selectedType)
     );
     this.createCardSprites(this.filteredDeck);
@@ -129,7 +131,7 @@ class DeckMenuScene extends Phaser.Scene {
     return this.deck.filter((card) => card.id === cardId);
   }
 
-  createCardSprites(cards = this.storedCards) {
+  createCardSprites(cards = this.storedCardsFiltred) {
     if (this.cardsListContainer) {
       this.cardsListContainer.destroy(); // Destroy the previous container
     }
@@ -246,7 +248,7 @@ class DeckMenuScene extends Phaser.Scene {
     const paddingY = 25;
 
     // Aggregate the cards by their name and count occurrences
-    const cardCounts = this.deck.reduce((acc, card) => {
+    const cardCounts = this.deckFiltred.reduce((acc, card) => {
       if (!acc[card.id]) {
         acc[card.id] = { ...card, count: 0 };
       }
@@ -298,7 +300,17 @@ class DeckMenuScene extends Phaser.Scene {
     });
   }
 
-  displayDeckInfos(container) {
+  displayDeckInfos(container, deckContainer) {
+    const trainerCount = this.deck.filter(
+      (card) => card.supertype === "Trainer"
+    ).length;
+    const pkmnCount = this.deck.filter(
+      (card) => card.supertype === "Pokémon"
+    ).length;
+    const energyCount = this.deck.filter(
+      (card) => card.supertype === "Energy"
+    ).length;
+
     const textPanelImage = this.add.image(0, 0, "text");
     textPanelImage.setOrigin(0.5, 0.5);
 
@@ -319,19 +331,52 @@ class DeckMenuScene extends Phaser.Scene {
     textPanel.setInteractive();
     textPanel.setDepth(50);
 
-    const largeButton = new LargeButton(
+    const pkmnButton = new LargeButton(
       this,
-      50,
-      50,
+      100,
+      75,
       (scene) => {
-        console.log("zizi");
+        this.deckFiltred = this.deck.filter(
+          (card) => card.supertype === "Pokémon"
+        );
+        this.displayDeck(deckContainer);
       },
-      "Pokemon"
+      `Pokémon ${pkmnCount}`
     );
-    largeButton.setDepth(50);
+    pkmnButton.setDepth(50);
+
+    const trainerButton = new LargeButton(
+      this,
+      275,
+      75,
+      (scene) => {
+        this.deckFiltred = this.deck.filter(
+          (card) => card.supertype === "Trainer"
+        );
+        this.displayDeck(deckContainer);
+      },
+      `Trainer ${trainerCount}`
+    );
+    trainerButton.setDepth(50);
+
+    const energyButton = new LargeButton(
+      this,
+      450,
+      75,
+      (scene) => {
+        this.deckFiltred = this.deck.filter(
+          (card) => card.supertype === "Energy"
+        );
+        this.displayDeck(deckContainer);
+      },
+      `Energy ${energyCount}`
+    );
+    energyButton.setDepth(50);
 
     container.add(textPanel);
-    container.add(largeButton);
+    container.add(pkmnButton);
+    container.add(trainerButton);
+    container.add(energyButton);
   }
 
   deckContainerToggle() {
@@ -361,7 +406,7 @@ class DeckMenuScene extends Phaser.Scene {
       this.deckInfosContainer.setDepth(50);
 
       this.displayDeck(this.deckContainer);
-      this.displayDeckInfos(this.deckInfosContainer);
+      this.displayDeckInfos(this.deckInfosContainer, this.deckContainer);
       console.log("DECK Visible");
     } else {
       this.graphics.clear();
