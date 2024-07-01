@@ -239,7 +239,7 @@ class DeckMenuScene extends Phaser.Scene {
   }
 
   displayDeck(deckContainer) {
-    deckContainer.removeAll(); // Clear any existing children
+    deckContainer.removeAll(true); // Clear any existing children
 
     const cardWidth = 75;
     const cardHeight = 100;
