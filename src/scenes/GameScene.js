@@ -11,8 +11,26 @@ class GameScene extends Phaser.Scene {
   }
 
   create() {
+    this.player = this.game.registry.get("player");
+    this.loadAndDisplayFirstCard();
+    console.log(this.player.deck);
+  }
+
+  loadAndDisplayFirstCard() {
+    if (this.player.deck.length > 0) {
+      const uniqueKey = this.player.deck[0].id;
+      this.load.image(uniqueKey, this.player.deck[0].images.small);
+      this.load.once('complete', () => {
+        this.displayFirstCard(uniqueKey);
+      });
+      this.load.start();
+    }
+  }
+  
+  displayFirstCard(uniqueKey) {
     // Set up the game board and other elements
-    const cardImage = this.add.image(200, 300, "firstCard");
+
+    const cardImage = this.add.image(200, 300, uniqueKey);
     cardImage.setScale(0.8);
 
     new BackButton(this, 50, 50, (scene) => {

@@ -58,7 +58,6 @@ class PreloadScene extends Phaser.Scene {
 
       // Load the first card image
       if (cards.length > 0) {
-        this.load.image('firstCard', stored[120].images.small);
         this.load.once('complete', () => {
           this.events.emit('cardsLoaded');
         });

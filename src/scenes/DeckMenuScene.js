@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import BackButton from "./BackButton";
 import DropDown from "./DropDown";
 import LargeButton from "./LargeButton";
+import Player from "../class/Player";
 
 class DeckMenuScene extends Phaser.Scene {
   constructor() {
@@ -23,8 +24,13 @@ class DeckMenuScene extends Phaser.Scene {
 
   create() {
     this.storedCards = this.game.registry.get("stored");
+    this.game.registry.set('player', this.player);
+    if (!this.player) {
+      this.player = new Player();
+      this.game.registry.set('player', this.player);
+  }
     this.createBackground();
-    this.deck = []; // Initialize the deck as an array
+    this.deck = this.player.deck || []; // Initialize the deck as an array
     this.deckFiltred = this.deck;
     this.storedCardsFiltred = this.storedCards;
     this.createCardSprites();

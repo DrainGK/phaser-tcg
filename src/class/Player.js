@@ -8,3 +8,5 @@ class Player {
     this.discardPil = [];
   }
 }
+
+export default Player;
